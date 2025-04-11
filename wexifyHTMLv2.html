@@ -490,6 +490,98 @@
         .animate {
             animation: fadeInUp 0.5s ease forwards;
         }
+            /* New Animation Styles */
+        .typing-container {
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        .typing-text {
+            border-right: 3px solid var(--primary);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 3s steps(40) 0.5s forwards, blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary) }
+        }
+        
+        .design-element {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .wireframe {
+            position: absolute;
+            top: 10%;
+            right: 15%;
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--primary);
+            border-radius: 5px;
+            animation: fadeInWireframe 0.5s ease 3.5s forwards;
+        }
+        
+        .color-palette {
+            position: absolute;
+            bottom: 20%;
+            right: 20%;
+            display: flex;
+            animation: fadeInPalette 0.5s ease 4s forwards;
+        }
+        
+        .color-swatch {
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+            border-radius: 50%;
+        }
+        
+        .code-block {
+            position: absolute;
+            top: 40%;
+            right: 5%;
+            font-family: monospace;
+            background: rgba(0,0,0,0.7);
+            color: #00ff00;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            animation: fadeInCode 0.5s ease 4.5s forwards;
+        }
+        
+        @keyframes fadeInWireframe {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 0.7; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInPalette {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInCode {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 0.9; transform: translateY(0); }
+        }
+        
+        .reveal-text {
+            opacity: 0;
+            animation: revealText 0.5s ease forwards;
+        }
+        
+        @keyframes revealText {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -508,22 +600,34 @@
             </nav>
         </div>
     </header>
-
-    <!-- Hero Section -->
+        <!-- Replace your current hero section with this -->
     <section class="hero">
         <div class="container">
             <div class="hero-content animate">
-                <h1>Your vision, our expertise.</h1>
-                <p>We create stunning, responsive websites tailored to your business needs. Stand out from the competition with a professional web presence that converts visitors into customers.</p>
-                <div style="margin-top: 2rem;">
+                <h1><span class="typing-container"><span class="typing-text">Your vision, our expertise.</span></span></h1>
+                <p id="hero-description" style="opacity: 0;">We create stunning, responsive websites tailored to your business needs. Stand out from the competition with a professional web presence that converts visitors into customers.</p>
+                <div id="hero-buttons" style="margin-top: 2rem; opacity: 0;">
                     <a href="#pricing" class="btn btn-primary">View Packages</a>
                     <a href="#contact" class="btn btn-outline" style="margin-left: 1rem;">Contact Us</a>
                 </div>
             </div>
             <img src="/api/placeholder/600/500" alt="Website Design" class="hero-image" />
+            
+            <!-- Design Elements -->
+            <div class="design-element wireframe"></div>
+            <div class="design-element color-palette">
+                <div class="color-swatch" style="background-color: var(--primary);"></div>
+                <div class="color-swatch" style="background-color: var(--secondary);"></div>
+                <div class="color-swatch" style="background-color: var(--success);"></div>
+                <div class="color-swatch" style="background-color: var(--dark);"></div>
+            </div>
+            <div class="design-element code-block">
+                &lt;div class="wexify"&gt;<br>
+                &nbsp;&nbsp;Designing dreams<br>
+                &lt;/div&gt;
+            </div>
         </div>
     </section>
-
     <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
@@ -760,6 +864,31 @@
         
         window.addEventListener('scroll', animateOnScroll);
         window.addEventListener('load', animateOnScroll);
+        
+        document.addEventListener('DOMContentLoaded', function() {
+        // Animation sequence
+        setTimeout(function() {
+            document.getElementById('hero-description').style.animation = 'revealText 0.5s ease forwards';
+        }, 3000); // After typing animation completes
+        
+        setTimeout(function() {
+            document.getElementById('hero-buttons').style.animation = 'revealText 0.5s ease forwards';
+        }, 3500); // After description appears
+        
+        // Optional: Add scroll animation to show expertise elements
+        window.addEventListener('scroll', function() {
+            const scrollPos = window.scrollY;
+            if (scrollPos > 100) {
+                document.querySelectorAll('.design-element').forEach(el => {
+                    el.style.opacity = '0'; // Hide when scrolled down
+                });
+            } else {
+                document.querySelectorAll('.design-element').forEach(el => {
+                    el.style.opacity = ''; // Show when back at top
+                });
+            }
+        });
+    });
     </script>
 </body>
 </html>
