@@ -40,15 +40,10 @@
 
         h1 {
             font-size: 3.5rem;
-            /* Fix for cross-browser gradient text compatibility */
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            /* Fallback for browsers that don't support text gradient */
-            @supports not (background-clip: text) {
-                color: var(--primary);
-            }
         }
 
         h2 {
@@ -158,16 +153,6 @@
             box-shadow: 0 10px 20px rgba(58, 134, 255, 0.2);
         }
 
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--dark);
-        }
-        
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -176,7 +161,6 @@
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 249, 250, 0.9));
             position: relative;
             overflow: hidden;
-            padding-top: 80px; /* Add padding for fixed header */
         }
 
         .hero-content {
@@ -192,7 +176,6 @@
             transform: translateY(-50%);
             width: 50%;
             z-index: 1;
-            max-width: 600px; /* Prevent image from getting too large */
         }
 
         /* Features */
@@ -212,13 +195,6 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .feature-card.animate {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .feature-card:hover {
@@ -257,13 +233,6 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .pricing-card.animate {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .pricing-card:hover {
@@ -317,26 +286,6 @@
             left: 0;
             color: var(--success);
             font-weight: 700;
-        }
-
-        /* Portfolio */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .portfolio-item {
-            width: 100%;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            overflow: hidden; /* Ensure image stays within rounded corners */
-        }
-        
-        .portfolio-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
         /* CTA */
@@ -484,116 +433,6 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate {
-            animation: fadeInUp 0.5s ease forwards;
-        }
-        
-        /* New Animation Styles */
-        .typing-container {
-            display: inline-block;
-            margin-right: 8px;
-        }
-        
-        .typing-text {
-            border-right: 3px solid var(--primary);
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
-            animation: typing 3s steps(40) 0.5s forwards, blink-caret 0.75s step-end infinite;
-        }
-        
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--primary) }
-        }
-        
-        .design-element {
-            position: absolute;
-            opacity: 0;
-            transform: translateY(20px);
-            z-index: 1; /* Ensure design elements are below text */
-        }
-        
-        .wireframe {
-            top: 10%;
-            right: 15%;
-            width: 100px;
-            height: 100px;
-            border: 2px solid var(--primary);
-            border-radius: 5px;
-            animation: fadeInWireframe 0.5s ease 3.5s forwards;
-        }
-        
-        .color-palette {
-            bottom: 20%;
-            right: 20%;
-            display: flex;
-            animation: fadeInPalette 0.5s ease 4s forwards;
-        }
-        
-        .color-swatch {
-            width: 30px;
-            height: 30px;
-            margin-right: 5px;
-            border-radius: 50%;
-        }
-        
-        .code-block {
-            top: 40%;
-            right: 5%;
-            font-family: monospace;
-            background: rgba(0,0,0,0.7);
-            color: #00ff00;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 14px;
-            animation: fadeInCode 0.5s ease 4.5s forwards;
-            max-width: 230px; /* Prevent overflow on small screens */
-            word-break: break-word;
-        }
-        
-        @keyframes fadeInWireframe {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 0.7; transform: translateY(0); }
-        }
-        
-        @keyframes fadeInPalette {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes fadeInCode {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 0.9; transform: translateY(0); }
-        }
-        
-        .reveal-text {
-            opacity: 0;
-            animation: revealText 0.5s ease forwards;
-        }
-        
-        @keyframes revealText {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         /* Responsive */
         @media (max-width: 992px) {
             h1 {
@@ -606,41 +445,9 @@
                 width: 45%;
                 right: -10%;
             }
-            .design-element {
-                transform: scale(0.8);
-            }
-            .wireframe {
-                top: 15%;
-                right: 10%;
-            }
-            .code-block {
-                right: 2%;
-                font-size: 12px;
-            }
         }
 
         @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: white;
-                flex-direction: column;
-                align-items: center;
-                padding: 1rem 0;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            }
-            .nav-links.active {
-                display: flex;
-            }
-            .nav-links li {
-                margin: 0.5rem 0;
-            }
             .hero-image {
                 opacity: 0.3;
                 width: 80%;
@@ -657,22 +464,31 @@
             .footer-content {
                 flex-direction: column;
             }
-            /* Hide design elements on mobile */
-            .design-element {
-                display: none;
-            }
         }
 
         @media (max-width: 576px) {
             h1 {
                 font-size: 2.5rem;
             }
-            section {
-                padding: 3rem 0;
+            .nav-links {
+                display: none;
             }
-            .container {
-                padding: 0 1rem;
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.5s ease forwards;
         }
     </style>
 </head>
@@ -682,8 +498,7 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">Wexify</a>
-                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-                <ul class="nav-links" id="navLinks">
+                <ul class="nav-links">
                     <li><a href="#features">Features</a></li>
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
@@ -693,58 +508,21 @@
             </nav>
         </div>
     </header>
-        
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content animate">
-                <h1><span class="typing-container"><span class="typing-text">Your vision, our expertise.</span></span></h1>
-                <p id="hero-description" class="hero-text">We create stunning, responsive websites tailored to your business needs. Stand out from the competition with a professional web presence that converts visitors into customers.</p>
-                <div id="hero-buttons" class="hero-buttons">
+                <h1>Your vision, our expertise.</h1>
+                <p>We create stunning, responsive websites tailored to your business needs. Stand out from the competition with a professional web presence that converts visitors into customers.</p>
+                <div style="margin-top: 2rem;">
                     <a href="#pricing" class="btn btn-primary">View Packages</a>
                     <a href="#contact" class="btn btn-outline" style="margin-left: 1rem;">Contact Us</a>
                 </div>
             </div>
             <img src="/api/placeholder/600/500" alt="Website Design" class="hero-image" />
-            
-            <!-- Design Elements -->
-            <div class="design-element wireframe"></div>
-            <div class="design-element color-palette">
-                <div class="color-swatch" style="background-color: var(--primary);"></div>
-                <div class="color-swatch" style="background-color: var(--secondary);"></div>
-                <div class="color-swatch" style="background-color: var(--success);"></div>
-                <div class="color-swatch" style="background-color: var(--dark);"></div>
-            </div>
-            <div class="design-element code-block">
-                &lt;div class="wexify"&gt;<br>
-                &nbsp;&nbsp;Designing dreams<br>
-                &lt;/div&gt;
-            </div>
         </div>
     </section>
-    
-    <style>
-    /* Additional hero section styles */
-    .hero-text {
-        opacity: 0;
-        animation: fadeIn 0.5s ease 3.5s forwards;
-    }
-    
-    .hero-buttons {
-        margin-top: 2rem;
-        opacity: 0;
-        animation: fadeIn 0.5s ease 4s forwards;
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    </style>
-    
-    <script>
-    // Hero animation script
-    document.addEventListener('DOMContentLoaded', function() {
 
     <!-- Features Section -->
     <section class="features" id="features">
@@ -844,20 +622,19 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
+    <!-- Portfolio Section (placeholder) -->
     <section id="portfolio" style="background-color: white;">
         <div class="container">
             <h2 style="text-align: center;">Our Recent Work</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">Take a look at some of the websites we've designed for our satisfied clients.</p>
             
-            <div class="portfolio-grid">
-                <!-- Fixed portfolio images to use placeholders instead of non-existent paths -->
-                <img src="/wexifyportf/imgportfolio3.png" alt="E-commerce Website" class="portfolio-item">
-                <img src="/wexifyportf/imgportfolio2.png" alt="Business Portfolio" class="portfolio-item">
-                <img src="/wexifyportf/imgportfolio1.png" alt="Restaurant Website" class="portfolio-item">
-                <img src="/api/placeholder/400/300" alt="Fitness Studio Website" class="portfolio-item">
-                <img src="/api/placeholder/400/300" alt="Tech Blog" class="portfolio-item">
-                <img src="/api/placeholder/400/300" alt="Photography Portfolio" class="portfolio-item">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
+                <img src="/wexifyportf/imgportfolio3.png" alt="Portfolio Item" style="width: 100%; border-radius: 10px; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                <img src="/wexifyportf/imgportfolio2.png" alt="Portfolio Item" style="width: 100%; border-radius: 10px; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                <img src="/wexifyportf/imgportfolio1.png" alt="Portfolio Item" style="width: 100%; border-radius: 10px; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                <img src="/api/placeholder/400/300" alt="Portfolio Item" style="width: 100%; border-radius: 10px; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                <img src="/api/placeholder/400/300" alt="Portfolio Item" style="width: 100%; border-radius: 10px; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                <img src="/api/placeholder/400/300" alt="Portfolio Item" style="width: 100%; border-radius: 10px; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
             </div>
         </div>
     </section>
@@ -877,7 +654,7 @@
             <h2 style="text-align: center;">Get In Touch</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">Have questions or ready to start your project? Fill out the form below and we'll get back to you within 24 hours.</p>
             
-            <form class="contact-form" id="contactForm">
+            <form class="contact-form">
                 <div class="form-group">
                     <label for="name" class="form-label">Your Name</label>
                     <input type="text" id="name" class="form-input" placeholder="John Doe" required>
@@ -930,80 +707,59 @@
                 </div>
                 
                 <div class="footer-links">
-                    <h4>Quick Links</h4>
+                    <h4>Company</h4>
                     <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
-                        <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Work</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-links">
                     <h4>Contact</h4>
                     <ul>
-                        <li>info@wexify.com</li>
+                        <li>hello@wexify.com</li>
                         <li>+1 (555) 123-4567</li>
-                        <li>123 Web Street, Digital City</li>
+                        <li>123 Web Avenue, Digital City</li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 Wexify. All rights reserved.</p>
+                &copy; 2025 Wexify. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        // Mobile Menu Toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            document.getElementById('navLinks').classList.toggle('active');
-        });
-        
-        // Animate elements on scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animate hero text after typing animation completes
-            setTimeout(function() {
-                document.getElementById('hero-description').style.opacity = '1';
-                document.getElementById('hero-description').classList.add('reveal-text');
-                
-                setTimeout(function() {
-                    document.getElementById('hero-buttons').style.opacity = '1';
-                    document.getElementById('hero-buttons').classList.add('reveal-text');
-                }, 500);
-            }, 3500);
-            
-            // Intersection Observer for scroll animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            // Observe feature cards
-            document.querySelectorAll('.feature-card').forEach(card => {
-                observer.observe(card);
-            });
-            
-            // Observe pricing cards
-            document.querySelectorAll('.pricing-card').forEach(card => {
-                observer.observe(card);
-            });
-            
-            // Form submission
-            document.getElementById('contactForm').addEventListener('submit', function(e) {
+        // Simple scroll animation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                alert('Thank you for your message! We will get back to you shortly.');
-                this.reset();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
+
+        // Animate elements when they come into view
+        const animateOnScroll = () => {
+            const cards = document.querySelectorAll('.feature-card, .pricing-card');
+            
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const triggerBottom = window.innerHeight * 0.8;
+                
+                if (cardTop < triggerBottom) {
+                    card.classList.add('animate');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>
