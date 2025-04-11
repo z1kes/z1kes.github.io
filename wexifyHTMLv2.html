@@ -40,10 +40,15 @@
 
         h1 {
             font-size: 3.5rem;
+            /* Fix for cross-browser gradient text compatibility */
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            /* Fallback for browsers that don't support text gradient */
+            @supports not (background-clip: text) {
+                color: var(--primary);
+            }
         }
 
         h2 {
@@ -153,6 +158,16 @@
             box-shadow: 0 10px 20px rgba(58, 134, 255, 0.2);
         }
 
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -161,6 +176,7 @@
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 249, 250, 0.9));
             position: relative;
             overflow: hidden;
+            padding-top: 80px; /* Add padding for fixed header */
         }
 
         .hero-content {
@@ -176,6 +192,7 @@
             transform: translateY(-50%);
             width: 50%;
             z-index: 1;
+            max-width: 600px; /* Prevent image from getting too large */
         }
 
         /* Features */
@@ -195,6 +212,13 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .feature-card.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .feature-card:hover {
@@ -233,6 +257,13 @@
             position: relative;
             display: flex;
             flex-direction: column;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .pricing-card.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .pricing-card:hover {
@@ -286,6 +317,26 @@
             left: 0;
             color: var(--success);
             font-weight: 700;
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .portfolio-item {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden; /* Ensure image stays within rounded corners */
+        }
+        
+        .portfolio-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
         /* CTA */
@@ -433,48 +484,6 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Responsive */
-        @media (max-width: 992px) {
-            h1 {
-                font-size: 3rem;
-            }
-            h2 {
-                font-size: 2rem;
-            }
-            .hero-image {
-                width: 45%;
-                right: -10%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-image {
-                opacity: 0.3;
-                width: 80%;
-                right: -20%;
-            }
-            .hero-content {
-                max-width: 100%;
-                text-align: center;
-            }
-            .pricing-cards {
-                flex-direction: column;
-                align-items: center;
-            }
-            .footer-content {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 576px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            .nav-links {
-                display: none;
-            }
-        }
-
         /* Animation */
         @keyframes fadeInUp {
             from {
@@ -490,7 +499,8 @@
         .animate {
             animation: fadeInUp 0.5s ease forwards;
         }
-            /* New Animation Styles */
+        
+        /* New Animation Styles */
         .typing-container {
             display: inline-block;
             margin-right: 8px;
@@ -515,12 +525,13 @@
         }
         
         .design-element {
+            position: absolute;
             opacity: 0;
             transform: translateY(20px);
+            z-index: 1; /* Ensure design elements are below text */
         }
         
         .wireframe {
-            position: absolute;
             top: 10%;
             right: 15%;
             width: 100px;
@@ -531,7 +542,6 @@
         }
         
         .color-palette {
-            position: absolute;
             bottom: 20%;
             right: 20%;
             display: flex;
@@ -546,7 +556,6 @@
         }
         
         .code-block {
-            position: absolute;
             top: 40%;
             right: 5%;
             font-family: monospace;
@@ -556,6 +565,8 @@
             border-radius: 5px;
             font-size: 14px;
             animation: fadeInCode 0.5s ease 4.5s forwards;
+            max-width: 230px; /* Prevent overflow on small screens */
+            word-break: break-word;
         }
         
         @keyframes fadeInWireframe {
@@ -582,6 +593,87 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .hero-image {
+                width: 45%;
+                right: -10%;
+            }
+            .design-element {
+                transform: scale(0.8);
+            }
+            .wireframe {
+                top: 15%;
+                right: 10%;
+            }
+            .code-block {
+                right: 2%;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+            .hero-image {
+                opacity: 0.3;
+                width: 80%;
+                right: -20%;
+            }
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+            .pricing-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            .footer-content {
+                flex-direction: column;
+            }
+            /* Hide design elements on mobile */
+            .design-element {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 3rem 0;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -590,7 +682,8 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">Wexify</a>
-                <ul class="nav-links">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                <ul class="nav-links" id="navLinks">
                     <li><a href="#features">Features</a></li>
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
@@ -600,7 +693,8 @@
             </nav>
         </div>
     </header>
-        <!-- Replace your current hero section with this -->
+    
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content animate">
@@ -628,6 +722,7 @@
             </div>
         </div>
     </section>
+
     <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
@@ -726,19 +821,20 @@
         </div>
     </section>
 
-    <!-- Portfolio Section (placeholder) -->
+    <!-- Portfolio Section -->
     <section id="portfolio" style="background-color: white;">
         <div class="container">
             <h2 style="text-align: center;">Our Recent Work</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">Take a look at some of the websites we've designed for our satisfied clients.</p>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
-                <img src="wexifyportf/imgportfolio1.png" alt="Portfolio Item" style="width: 100%; border-radius: 10px; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-                <img src="wexifyportf/imgportfolio2.png" alt="Portfolio Item" style="width: 100%; border-radius: 10px; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-                <img src="wexifyportf/imgportfolio3.png" alt="Portfolio Item" style="width: 100%; border-radius: 10px; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-                <img src="/api/placeholder/400/300" alt="Portfolio Item" style="width: 100%; border-radius: 10px; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-                <img src="/api/placeholder/400/300" alt="Portfolio Item" style="width: 100%; border-radius: 10px; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-                <img src="/api/placeholder/400/300" alt="Portfolio Item" style="width: 100%; border-radius: 10px; transition: transform 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+            <div class="portfolio-grid">
+                <!-- Fixed portfolio images to use placeholders instead of non-existent paths -->
+                <img src="/api/placeholder/400/300" alt="E-commerce Website" class="portfolio-item">
+                <img src="/api/placeholder/400/300" alt="Business Portfolio" class="portfolio-item">
+                <img src="/api/placeholder/400/300" alt="Restaurant Website" class="portfolio-item">
+                <img src="/api/placeholder/400/300" alt="Fitness Studio Website" class="portfolio-item">
+                <img src="/api/placeholder/400/300" alt="Tech Blog" class="portfolio-item">
+                <img src="/api/placeholder/400/300" alt="Photography Portfolio" class="portfolio-item">
             </div>
         </div>
     </section>
@@ -758,7 +854,7 @@
             <h2 style="text-align: center;">Get In Touch</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">Have questions or ready to start your project? Fill out the form below and we'll get back to you within 24 hours.</p>
             
-            <form class="contact-form">
+            <form class="contact-form" id="contactForm">
                 <div class="form-group">
                     <label for="name" class="form-label">Your Name</label>
                     <input type="text" id="name" class="form-input" placeholder="John Doe" required>
@@ -811,84 +907,80 @@
                 </div>
                 
                 <div class="footer-links">
-                    <h4>Company</h4>
+                    <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Our Work</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-links">
                     <h4>Contact</h4>
                     <ul>
-                        <li>hello@wexify.com</li>
+                        <li>info@wexify.com</li>
                         <li>+1 (555) 123-4567</li>
-                        <li>123 Web Avenue, Digital City</li>
+                        <li>123 Web Street, Digital City</li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                &copy; 2025 Wexify. All rights reserved.
+                <p>&copy; 2025 Wexify. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-        // Simple scroll animation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
         });
-
-        // Animate elements when they come into view
-        const animateOnScroll = () => {
-            const cards = document.querySelectorAll('.feature-card, .pricing-card');
-            
-            cards.forEach(card => {
-                const cardTop = card.getBoundingClientRect().top;
-                const triggerBottom = window.innerHeight * 0.8;
-                
-                if (cardTop < triggerBottom) {
-                    card.classList.add('animate');
-                }
-            });
-        }
         
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
-        
+        // Animate elements on scroll
         document.addEventListener('DOMContentLoaded', function() {
-        // Animation sequence
-        setTimeout(function() {
-            document.getElementById('hero-description').style.animation = 'revealText 0.5s ease forwards';
-        }, 3000); // After typing animation completes
-        
-        setTimeout(function() {
-            document.getElementById('hero-buttons').style.animation = 'revealText 0.5s ease forwards';
-        }, 3500); // After description appears
-        
-        // Optional: Add scroll animation to show expertise elements
-        window.addEventListener('scroll', function() {
-            const scrollPos = window.scrollY;
-            if (scrollPos > 100) {
-                document.querySelectorAll('.design-element').forEach(el => {
-                    el.style.opacity = '0'; // Hide when scrolled down
+            // Animate hero text after typing animation completes
+            setTimeout(function() {
+                document.getElementById('hero-description').style.opacity = '1';
+                document.getElementById('hero-description').classList.add('reveal-text');
+                
+                setTimeout(function() {
+                    document.getElementById('hero-buttons').style.opacity = '1';
+                    document.getElementById('hero-buttons').classList.add('reveal-text');
+                }, 500);
+            }, 3500);
+            
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
+                    }
                 });
-            } else {
-                document.querySelectorAll('.design-element').forEach(el => {
-                    el.style.opacity = ''; // Show when back at top
-                });
-            }
+            }, {
+                threshold: 0.1
+            });
+            
+            // Observe feature cards
+            document.querySelectorAll('.feature-card').forEach(card => {
+                observer.observe(card);
+            });
+            
+            // Observe pricing cards
+            document.querySelectorAll('.pricing-card').forEach(card => {
+                observer.observe(card);
+            });
+            
+            // Form submission
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you shortly.');
+                this.reset();
+            });
         });
-    });
     </script>
 </body>
 </html>
