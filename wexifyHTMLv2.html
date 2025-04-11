@@ -693,14 +693,14 @@
             </nav>
         </div>
     </header>
-    
+        
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content animate">
                 <h1><span class="typing-container"><span class="typing-text">Your vision, our expertise.</span></span></h1>
-                <p id="hero-description" style="opacity: 0;">We create stunning, responsive websites tailored to your business needs. Stand out from the competition with a professional web presence that converts visitors into customers.</p>
-                <div id="hero-buttons" style="margin-top: 2rem; opacity: 0;">
+                <p id="hero-description" class="hero-text">We create stunning, responsive websites tailored to your business needs. Stand out from the competition with a professional web presence that converts visitors into customers.</p>
+                <div id="hero-buttons" class="hero-buttons">
                     <a href="#pricing" class="btn btn-primary">View Packages</a>
                     <a href="#contact" class="btn btn-outline" style="margin-left: 1rem;">Contact Us</a>
                 </div>
@@ -722,6 +722,29 @@
             </div>
         </div>
     </section>
+    
+    <style>
+    /* Additional hero section styles */
+    .hero-text {
+        opacity: 0;
+        animation: fadeIn 0.5s ease 3.5s forwards;
+    }
+    
+    .hero-buttons {
+        margin-top: 2rem;
+        opacity: 0;
+        animation: fadeIn 0.5s ease 4s forwards;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    </style>
+    
+    <script>
+    // Hero animation script
+    document.addEventListener('DOMContentLoaded', function() {
 
     <!-- Features Section -->
     <section class="features" id="features">
