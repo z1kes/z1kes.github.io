@@ -5,7 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wexify - Professional Website Creation</title>
     <style>
-        /* Reset and Base Styles */
+                /* Reset and Base Styles */
+                .hero {
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(wexifybg.png); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            filter: brightness(0.7); /* Darkens the image slightly to make text more readable */
+        }
+
+        .hero-content {
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -509,20 +548,20 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content animate">
-                <h1>Your vision, our expertise.</h1>
-                <p>We create stunning, responsive websites tailored to your business needs. Stand out from the competition with a professional web presence that converts visitors into customers.</p>
-                <div style="margin-top: 2rem;">
-                    <a href="#pricing" class="btn btn-primary">View Packages</a>
-                    <a href="#contact" class="btn btn-outline" style="margin-left: 1rem;">Contact Us</a>
-                </div>
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-background"></div>
+    <div class="container">
+        <div class="hero-content animate">
+            <h1>Your vision, our expertise.</h1>
+            <p>We create stunning, responsive websites tailored to your business needs. Stand out from the competition with a professional web presence that converts visitors into customers.</p>
+            <div style="margin-top: 2rem;">
+                <a href="#pricing" class="btn btn-primary">View Packages</a>
+                <a href="#contact" class="btn btn-outline" style="margin-left: 1rem;">Contact Us</a>
             </div>
-            <img src="Placeholder image" alt="Website Design" class="hero-image" />
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Features Section -->
     <section class="features" id="features">
